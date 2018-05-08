@@ -22,38 +22,30 @@ class Net(nn.Module):
         # 1 input image channel (grayscale), 32 output channels/feature maps, 5x5 square convolution kernel
         self.features = nn.Sequential(
             nn.Conv2d(1, 32, 3),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.MaxPool2d(2, 2),
             nn.Dropout2d(0.1),
 
             nn.Conv2d(32, 64, 2),
-            # nn.BatchNorm2d(64),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.MaxPool2d(2, 2),
             nn.Dropout2d(0.2),
 
             nn.Conv2d(64, 128, 2),
-            # nn.BatchNorm2d(128),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.MaxPool2d(2, 2),
             nn.Dropout2d(0.3)
-
-            # nn.Conv2d(128, 256, 3, padding=1),
-            # nn.BatchNorm2d(256),
-            # nn.ReLU(True),
-            # nn.MaxPool2d(2, 2)
         )
 
         self.n_features = 128 * 11 * 11
 
         self.classifier = nn.Sequential(
-            # nn.Dropout(),
             nn.Linear(self.n_features, 2048),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.Dropout(),
 
             nn.Linear(2048, 2048),
-            nn.ReLU(True),
+            nn.ReLU(),
 
             nn.Linear(2048, num_classes),
         )
